@@ -33,8 +33,7 @@ if tables is None:
 def crawl_dirs(directory, table, cursor, connection):
     '''Crawl through media directories and add filepaths not found in the existing database'''
     existing_qry = cursor.execute(f'''SELECT filepath FROM {table}''')
-    existing_files = existing_qry.fetchall()
-    existing_files = [i[0] for i in existing_files]
+    existing_files = [i[0] for i in existing_qry.fetchall()]
     for root, dirs, files in os.walk(directory, topdown=False):
         for name in files:
             if name.rsplit('.', maxsplit=1)[1] in file_extensions:
